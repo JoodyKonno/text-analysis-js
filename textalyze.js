@@ -16,7 +16,9 @@ const itemCounts = array => array.reduce((counts, item) => !counts.has(item)
   : counts.set(item, counts.get(item) + 1)
   , new Map());
 
-const stringToLetterArray = str => str.split('');
+const stringToLetterArray = str => typeof str == 'string' 
+  ? str.split('')
+  : [];
 
 if (require.main === module) {
   
