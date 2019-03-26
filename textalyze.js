@@ -32,4 +32,4 @@ if (require.main === module) {
  
 }
 
-module.exports = { itemCounts };
+module.exports = { itemCounts, stringToLetterArray };
