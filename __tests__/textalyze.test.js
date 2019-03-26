@@ -60,4 +60,11 @@ describe('sanitize', () => {
 
     expect(sanitize(input)).toEqual(expectedOutput);
   });
+
+  test('handles non-string inputs', () => {
+    const input = 10;
+    const expectedOutput = '';
+
+    expect(sanitize(input)).toEqual(expectedOutput);
+  });
 });

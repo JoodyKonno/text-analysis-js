@@ -20,7 +20,9 @@ const stringToLetterArray = str => typeof str == 'string'
   ? str.split('')
   : [];
 
-const sanitize = str => str.toLowerCase();
+const sanitize = str => typeof str == 'string' 
+  ? str.toLowerCase()
+  : '';
 
 if (require.main === module) {
   
