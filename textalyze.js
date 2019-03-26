@@ -11,14 +11,10 @@
  * @param {Array} array - The array of items to count
  * @param {Map} counts - A Map containing the counts of the items in the input array
  */
-const itemCounts = array => array
-  .reduce((counts, item) => {
-    !counts.has(item)
-      ? counts.set(item, 1)
-      : counts.set(item, counts.get(item) + 1);
-    
-    return counts;
-  }, new Map());
+const itemCounts = array => array.reduce((counts, item) => !counts.has(item)
+  ? counts.set(item, 1)
+  : counts.set(item, counts.get(item) + 1)
+  , new Map());
 
 if (require.main === module) {
   
