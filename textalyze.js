@@ -11,24 +11,14 @@
  * @param {Array} array - The array of items to count
  * @param {Map} counts - A Map containing the counts of the items in the input array
  */
-function itemCounts(array) {
-  let counts = new Map();
-
-  array.forEach(item => {
-
-    if (!counts.has(item)) {
-      counts.set(item, 0);
-    }
-
-    counts.set(item, counts.get(item) + 1);
-
-  });
-
-  // Your code here.
-  // Run 'npm test' to see what tests need to pass.
-
-  return counts;
-}
+const itemCounts = array => array
+  .reduce((counts, item) => {
+    !counts.has(item)
+      ? counts.set(item, 1)
+      : counts.set(item, counts.get(item) + 1);
+    
+    return counts;
+  }, new Map());
 
 if (require.main === module) {
   
