@@ -16,18 +16,22 @@ const itemCounts = array => array.reduce((counts, item) => !counts.has(item)
   : counts.set(item, counts.get(item) + 1)
   , new Map());
 
+const stringToLetterArray = str => typeof str == 'string' 
+  ? str.split('')
+  : [];
+
 if (require.main === module) {
   
   let args = "aabbccd";
   console.log(`The letter count for ${args} is: `);
-  console.log(itemCounts(args.split('')));
+  console.log(itemCounts(stringToLetterArray(args)));
 
   console.log('--------------------------');
 
   args = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque blandit turpis, eu pellentesque dui convallis vitae. Maecenas elit sem, fermentum non pellentesque eu, lacinia eget dui. Fusce accumsan, ex eget facilisis bibendum, est tortor congue tortor, varius aliquam ex magna et metus. Praesent suscipit diam eu diam tincidunt egestas. Quisque maximus purus posuere nisi dapibus, eu ornare diam fermentum. Vestibulum bibendum, mauris condimentum feugiat consectetur, nisl nunc aliquet urna, vel auctor magna diam sed mauris. Morbi faucibus, ex in hendrerit egestas, nulla purus gravida tortor, ac bibendum ligula dolor vel diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris facilisis, dolor posuere mattis ultrices, felis nibh pulvinar metus, at fringilla dolor ante eu augue. Ut auctor lacus ac odio venenatis pretium. Fusce eleifend lorem eu tincidunt pulvinar. Donec eu tellus et justo pharetra bibendum ut id libero. Fusce luctus velit ultricies ante iaculis fringilla.";
   console.log(`The letter count for ${args} is: `);
-  console.log(itemCounts(args.split('')));
+  console.log(itemCounts(stringToLetterArray(args)));
  
 }
 
-module.exports = { itemCounts };
+module.exports = { itemCounts, stringToLetterArray };
