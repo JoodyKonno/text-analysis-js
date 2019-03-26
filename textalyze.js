@@ -20,7 +20,7 @@ function itemCounts(array) {
       counts.set(item, 0);
     }
 
-    counts.set(item, parseInt(counts.get(item)) + 1);
+    counts.set(item, counts.get(item) + 1);
 
   });
 
