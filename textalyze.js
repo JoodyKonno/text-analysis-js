@@ -33,6 +33,24 @@ const itemFrequency = array => {
       .set(item, (map.get(item)/array.length).toFixed(2)), new Map());
 };
 
+const getHistogram = (frequencies, totalChartSize) => {
+  const result = [];
+  
+  frequencies.forEach((frequency, letter) => {
+    const bar = '=';
+
+    const item_bars = ( frequency * 100 ) / (100 / totalChartSize );
+    const chartBar = Array(totalChartSize)
+      .fill(bar, 0, item_bars)
+      .join('');
+
+    result.push(`${letter} [ ${(frequency * 100).toFixed(2)}% ] ${chartBar}>`);
+
+  });
+
+  return result.join('\n');
+};
+
 if (require.main === module) {
   
   const fs = require('fs');
@@ -56,8 +74,10 @@ if (require.main === module) {
       const itemCount = itemCounts(stringToLetterArray(sanitize(contents)));
       console.log(itemCount);
 
-      const itemFrquency = itemFrequency(stringToLetterArray(sanitize(contents)));
-      console.log(itemFrquency);
+      const itemFrequencies = itemFrequency(stringToLetterArray(sanitize(contents)));
+      console.log(itemFrequencies);
+
+      console.log(getHistogram(itemFrequencies, 200));
       
     });
 
@@ -65,4 +85,4 @@ if (require.main === module) {
 
 }
 
-module.exports = { itemCounts, itemFrequency, stringToLetterArray, sanitize };
+module.exports = { itemCounts, itemFrequency, stringToLetterArray, sanitize, getHistogram };
