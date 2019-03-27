@@ -24,6 +24,20 @@ const sanitize = str => typeof str == 'string'
   ? str.toLowerCase()
   : '';
 
+const itemFrequency = array => {
+  const total = array.length;
+
+  const map = itemCounts(array);
+
+  result = new Map();
+  array.forEach(letter => {
+    const frequency = (map.get(letter)/total).toPrecision(2);
+    result.set(letter, frequency);
+  });
+
+  return result;
+};
+
 if (require.main === module) {
   
   const fs = require('fs');
@@ -43,11 +57,17 @@ if (require.main === module) {
   
       console.log(`File contents: ${contents.slice(0, 40)}...`);
       console.log(`The letter count is: `);
-      console.log(itemCounts(stringToLetterArray(contents)));
+
+      const itemCount = itemCounts(stringToLetterArray(sanitize(contents)));
+      console.log(itemCount);
+
+      const itemFrquency = itemFrequency(stringToLetterArray(sanitize(contents)));
+      console.log(itemFrquency);
+      
     });
 
   });
 
 }
 
-module.exports = { itemCounts, stringToLetterArray, sanitize };
+module.exports = { itemCounts, itemFrequency, stringToLetterArray, sanitize };
