@@ -25,17 +25,9 @@ const sanitize = str => typeof str == 'string'
   : '';
 
 const itemFrequency = array => {
-  const total = array.length;
-
   const map = itemCounts(array);
-
-  result = new Map();
-  array.forEach(letter => {
-    const frequency = (map.get(letter)/total).toPrecision(2);
-    result.set(letter, frequency);
-  });
-
-  return result;
+  return array.reduce((frequencies, item) => frequencies
+    .set(item, (map.get(item)/array.length).toPrecision(2)), new Map);
 };
 
 if (require.main === module) {
