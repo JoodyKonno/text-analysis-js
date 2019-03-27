@@ -1,4 +1,4 @@
-const { itemCounts, stringToLetterArray, sanitize } = require('../textalyze');
+const { itemCounts, stringToLetterArray, sanitize, itemFrequency } = require('../textalyze');
 
 describe('itemCount', () => {
   test('returns a count of the strings in the array', () => {
@@ -66,5 +66,28 @@ describe('sanitize', () => {
     const expectedOutput = '';
 
     expect(sanitize(input)).toEqual(expectedOutput);
+  });
+});
+
+describe('itemFrequency', () => {
+  test('return a new Map with frequency', () => {
+    const input = ['a', 'a', 'a', 'b', 'b', 'b', 'c', 'c', 'c', 'c', 'c'];
+    const expectedOutput = new Map([['a', '0.27'], ['b', '0.27'], ['c', '0.45']]);
+
+    expect(itemFrequency(input)).toEqual(expectedOutput);
+  });
+
+  test('handles non-array inputs', () => {
+    const input = 'hello';
+    const expectedOutput = new Map();
+
+    expect(itemFrequency(input)).toEqual(expectedOutput);
+  });
+
+  test('return empty map when it receives an empty array input', () => {
+    const input = [];
+    const expectedOutput = new Map();
+
+    expect(itemFrequency(input)).toEqual(expectedOutput);
   });
 });
