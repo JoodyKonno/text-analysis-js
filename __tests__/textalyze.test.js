@@ -76,4 +76,18 @@ describe('itemFrequency', () => {
 
     expect(itemFrequency(input)).toEqual(expectedOutput);
   });
+
+  test('handles non-array inputs', () => {
+    const input = 'hello';
+    const expectedOutput = new Map();
+
+    expect(itemFrequency(input)).toEqual(expectedOutput);
+  });
+
+  test('return empty map when it receives an empty array input', () => {
+    const input = [];
+    const expectedOutput = new Map();
+
+    expect(itemFrequency(input)).toEqual(expectedOutput);
+  });
 });

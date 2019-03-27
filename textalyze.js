@@ -24,10 +24,13 @@ const sanitize = str => typeof str == 'string'
   ? str.toLowerCase()
   : '';
 
-const itemFrequency = array => {
+const itemFrequency = array => {  
+  if (typeof array != 'object' && !array.isArray)
+    return new Map();
+
   const map = itemCounts(array);
   return array.reduce((frequencies, item) => frequencies
-    .set(item, (map.get(item)/array.length).toPrecision(2)), new Map);
+      .set(item, (map.get(item)/array.length).toPrecision(2)), new Map());
 };
 
 if (require.main === module) {
