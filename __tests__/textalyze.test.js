@@ -1,4 +1,4 @@
-const { itemCounts, stringToLetterArray } = require('../textalyze');
+const { itemCounts, stringToLetterArray, sanitize } = require('../textalyze');
 
 describe('itemCount', () => {
   test('returns a count of the strings in the array', () => {
@@ -50,5 +50,21 @@ describe('stringToLetterArray', () => {
     const expectedOutput = [];
 
     expect(stringToLetterArray(input)).toEqual(expectedOutput);
+  });
+});
+
+describe('sanitize', () => {
+  test('return the lowercase version of given string', () => {
+    const input = 'aaAbCc.a';
+    const expectedOutput = 'aaabcc.a';
+
+    expect(sanitize(input)).toEqual(expectedOutput);
+  });
+
+  test('handles non-string inputs', () => {
+    const input = 10;
+    const expectedOutput = '';
+
+    expect(sanitize(input)).toEqual(expectedOutput);
   });
 });

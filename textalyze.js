@@ -20,6 +20,10 @@ const stringToLetterArray = str => typeof str == 'string'
   ? str.split('')
   : [];
 
+const sanitize = str => typeof str == 'string' 
+  ? str.toLowerCase()
+  : '';
+
 if (require.main === module) {
   
   let args = "aabbccd";
@@ -34,4 +38,4 @@ if (require.main === module) {
  
 }
 
-module.exports = { itemCounts, stringToLetterArray };
+module.exports = { itemCounts, stringToLetterArray, sanitize };
