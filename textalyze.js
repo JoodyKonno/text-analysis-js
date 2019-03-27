@@ -26,34 +26,28 @@ const sanitize = str => typeof str == 'string'
 
 if (require.main === module) {
   
-  let args = "aabbccd";
-  console.log(`The letter count for ${args} is: `);
-  console.log(itemCounts(stringToLetterArray(args)));
-
-  console.log('--------------------------');
-
-  args = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque blandit turpis, eu pellentesque dui convallis vitae. Maecenas elit sem, fermentum non pellentesque eu, lacinia eget dui. Fusce accumsan, ex eget facilisis bibendum, est tortor congue tortor, varius aliquam ex magna et metus. Praesent suscipit diam eu diam tincidunt egestas. Quisque maximus purus posuere nisi dapibus, eu ornare diam fermentum. Vestibulum bibendum, mauris condimentum feugiat consectetur, nisl nunc aliquet urna, vel auctor magna diam sed mauris. Morbi faucibus, ex in hendrerit egestas, nulla purus gravida tortor, ac bibendum ligula dolor vel diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris facilisis, dolor posuere mattis ultrices, felis nibh pulvinar metus, at fringilla dolor ante eu augue. Ut auctor lacus ac odio venenatis pretium. Fusce eleifend lorem eu tincidunt pulvinar. Donec eu tellus et justo pharetra bibendum ut id libero. Fusce luctus velit ultricies ante iaculis fringilla.";
-  console.log(`The letter count for ${args.slice(0, 40)} is: `);
-  console.log(itemCounts(stringToLetterArray(args)));
-
-  console.log('--------------------------');
-
   const fs = require('fs');
+  const path = require('path');
 
-  console.log('Reading file sample_data/moby_dick.txt');
-  fs.readFile('./sample_data/moby-dick.txt', (err, data) => {
-    if (err) {
-      console.log('Error reading file');
-      throw err;
-    }
+  const args = process.argv.slice(2);
 
-    const contents = new Buffer.from(data).toString();
+  args.forEach(arg => {
 
-    console.log(`File contents: ${contents.slice(0, 40)}...`);
-    console.log(`The letter count is: `);
-    console.log(itemCounts(stringToLetterArray(contents)));
+    fs.readFile(path.resolve(arg), (err, data) => {
+      if (err) {
+        console.log('Error reading file: ');
+        throw err;
+      }
+  
+      const contents = new Buffer.from(data).toString();
+  
+      console.log(`File contents: ${contents.slice(0, 40)}...`);
+      console.log(`The letter count is: `);
+      console.log(itemCounts(stringToLetterArray(contents)));
+    });
+
   });
- 
+
 }
 
 module.exports = { itemCounts, stringToLetterArray, sanitize };
