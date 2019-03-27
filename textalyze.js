@@ -27,21 +27,27 @@ const sanitize = str => typeof str == 'string'
 if (require.main === module) {
   
   const fs = require('fs');
+  const path = require('path');
 
-  console.log('Reading file sample_data/moby_dick.txt');
-  fs.readFile('./sample_data/moby-dick.txt', (err, data) => {
-    if (err) {
-      console.log('Error reading file');
-      throw err;
-    }
+  const args = process.argv.slice(2);
 
-    const contents = new Buffer.from(data).toString();
+  args.forEach(arg => {
 
-    console.log(`File contents: ${contents.slice(0, 40)}...`);
-    console.log(`The letter count is: `);
-    console.log(itemCounts(stringToLetterArray(contents)));
+    fs.readFile(path.resolve(arg), (err, data) => {
+      if (err) {
+        console.log('Error reading file: ');
+        throw err;
+      }
+  
+      const contents = new Buffer.from(data).toString();
+  
+      console.log(`File contents: ${contents.slice(0, 40)}...`);
+      console.log(`The letter count is: `);
+      console.log(itemCounts(stringToLetterArray(contents)));
+    });
+
   });
- 
+
 }
 
 module.exports = { itemCounts, stringToLetterArray, sanitize };
