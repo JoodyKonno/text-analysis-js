@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 /**
  * Given an input Array, returns a Map containing the count of each item in the input.
  * @param {Array} array - The array of items to count
@@ -40,10 +43,7 @@ const getHistogram = (frequencies, totalChartSize) => {
   return result.join('\n');
 };
 
-if (require.main === module) {
-  const fs = require('fs');
-  const path = require('path');
-
+const main = () => {
   const args = process.argv.slice(2);
 
   args.forEach((arg) => {
@@ -56,17 +56,15 @@ if (require.main === module) {
       const contents = Buffer.from(data).toString();
 
       console.log(`File contents: ${contents.slice(0, 40)}...`);
-      console.log('The letter count is: ');
-
-      const itemCount = itemCounts(stringToLetterArray(sanitize(contents)));
-      console.log(itemCount);
 
       const itemFrequencies = itemFrequency(stringToLetterArray(sanitize(contents)));
-      console.log(itemFrequencies);
-
       console.log(getHistogram(itemFrequencies, 200));
     });
   });
+};
+
+if (require.main === module) {
+  main();
 }
 
 module.exports = {
