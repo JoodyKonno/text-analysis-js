@@ -1,4 +1,10 @@
-const { itemCounts, stringToLetterArray, sanitize, itemFrequency, getHistogram } = require('../textalyze');
+const {
+  itemCounts,
+  stringToLetterArray,
+  sanitize,
+  itemFrequency,
+  getHistogram,
+} = require('../textalyze');
 
 describe('itemCount', () => {
   test('returns a count of the strings in the array', () => {
@@ -99,8 +105,8 @@ describe('getHistogram', () => {
       'a [ 50.00% ] ==>',
       'b [ 25.00% ] =>',
       'c [ 25.00% ] =>',
-      'd [ 0.00% ] >'
-    ].join("\n");
+      'd [ 0.00% ] >',
+    ].join('\n');
 
 
     expect(getHistogram(input, 4)).toEqual(expectedOutput);
