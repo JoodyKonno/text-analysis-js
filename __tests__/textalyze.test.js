@@ -62,7 +62,7 @@ describe('stringToLetterArray', () => {
 describe('sanitize', () => {
   test('return the lowercase version of given string', () => {
     const input = 'aaAbCc.a';
-    const expectedOutput = 'aaabcc.a';
+    const expectedOutput = 'aaabcca';
 
     expect(sanitize(input)).toEqual(expectedOutput);
   });

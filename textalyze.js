@@ -9,7 +9,9 @@ const itemCounts = array => array.reduce((counts, item) => (!counts.has(item)
 
 const stringToLetterArray = (str) => (typeof str === 'string' ? str.split('') : []);
 
-const sanitize = (str) => (typeof str === 'string' ? str.toLowerCase() : '');
+const sanitize = (str) => (typeof str === 'string' ? str
+  .replace(/[^a-zA-Z]/g, '')
+  .toLowerCase() : '');
 
 const itemFrequency = (array) => {
   if (typeof array !== 'object' && !array.isArray) {
