@@ -18,7 +18,7 @@ const itemFrequency = (array) => {
 
   const map = itemCounts(array);
   return array.reduce((frequencies, item) => frequencies
-    .set(item, (map.get(item) / array.length).toFixed(2)), new Map());
+    .set(item, (map.get(item) / array.length)), new Map());
 };
 
 const getHistogram = (frequencies, totalChartSize) => {

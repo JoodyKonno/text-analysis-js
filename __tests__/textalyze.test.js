@@ -78,9 +78,13 @@ describe('sanitize', () => {
 describe('itemFrequency', () => {
   test('return a new Map with frequency', () => {
     const input = ['a', 'a', 'a', 'b', 'b', 'b', 'c', 'c', 'c', 'c', 'c'];
-    const expectedOutput = new Map([['a', '0.27'], ['b', '0.27'], ['c', '0.45']]);
+    const expectedOutput = new Map([['a', 0.27], ['b', 0.27], ['c', 0.45]]);
 
-    expect(itemFrequency(input)).toEqual(expectedOutput);
+    const frequencies = itemFrequency(input);
+
+    expect(frequencies.get('a')).toBeCloseTo(expectedOutput.get('a'), 2);
+    expect(frequencies.get('b')).toBeCloseTo(expectedOutput.get('b'), 2);
+    expect(frequencies.get('c')).toBeCloseTo(expectedOutput.get('c'), 2);
   });
 
   test('handles non-array inputs', () => {
