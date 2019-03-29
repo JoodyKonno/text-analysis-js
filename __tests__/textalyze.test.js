@@ -106,10 +106,10 @@ describe('getHistogram', () => {
   test('returns a string of the histogram', () => {
     const input = new Map([['a', '0.50'], ['b', '0.25'], ['c', '0.25'], ['d', '0.00']]);
     const expectedOutput = [
-      'a [ 50.00% ] ==>',
-      'b [ 25.00% ] =>',
-      'c [ 25.00% ] =>',
-      'd [ 0.00% ] >',
+      'a [50.00%] ==>',
+      'b [25.00%] =>',
+      'c [25.00%] =>',
+      'd [ 0.00%] >',
     ].join('\n');
 
 

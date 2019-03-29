@@ -36,8 +36,9 @@ const getHistogram = (frequencies, totalChartSize) => {
     const chartBar = Array(totalChartSize)
       .fill(bar, 0, itemBars)
       .join('');
+    const itemBarSpace = (frequency >= 0.1) ? '' : ' ';
 
-    result.push(`${letter} [ ${(frequency * 100).toFixed(2)}% ] ${chartBar}>`);
+    result.push(`${letter} [${itemBarSpace}${(frequency * 100).toFixed(2)}%] ${chartBar}>`);
   });
 
   return result.join('\n');
