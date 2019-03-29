@@ -10,11 +10,21 @@ const itemCounts = array => array.reduce((counts, item) => (!counts.has(item)
   ? counts.set(item, 1)
   : counts.set(item, counts.get(item) + 1)), new Map());
 
-const stringToLetterArray = (str) => (typeof str === 'string' ? str.split('') : []);
+const stringToLetterArray = (str) => {
+  if (typeof str !== 'string') {
+    return [];
+  }
+  return str.split('');
+};
 
-const sanitize = (str) => (typeof str === 'string' ? str
-  .replace(/[^a-zA-Z]/g, '')
-  .toLowerCase() : '');
+const sanitize = (str) => {
+  if (typeof str === 'string') {
+    return '';
+  }
+  return str
+    .replace(/[^a-zA-Z]/g, '')
+    .toLowerCase();
+};
 
 const itemFrequency = (array) => {
   if (typeof array !== 'object' && !array.isArray) {
