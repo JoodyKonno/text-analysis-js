@@ -53,7 +53,7 @@ describe('stringToLetterArray', () => {
 
   test('handles non-string inputs', () => {
     const input = 10;
-    const expectedOutput = [];
+    const expectedOutput = ['1', '0'];
 
     expect(stringToLetterArray(input)).toEqual(expectedOutput);
   });
