@@ -10,30 +10,21 @@ const itemCounts = array => array.reduce((counts, item) => (!counts.has(item)
   ? counts.set(item, 1)
   : counts.set(item, counts.get(item) + 1)), new Map());
 
-const stringToLetterArray = (str) => {
-  if (typeof str !== 'string') {
-    return [];
-  }
-  return str.split('');
-};
+const stringToLetterArray = str => str
+  .toString()
+  .split('');
 
-const sanitize = (str) => {
-  if (typeof str !== 'string') {
-    return '';
-  }
-  return str
-    .replace(/[^a-zA-Z]/g, '')
-    .toLowerCase();
-};
+const sanitize = str => str
+  .toString()
+  .replace(/[^a-zA-Z]/g, '')
+  .toLowerCase();
 
 const itemFrequency = (array) => {
-  if (typeof array !== 'object' && !array.isArray) {
-    return new Map();
-  }
+  const items = [].concat(array);
 
-  const map = itemCounts(array);
-  return array.reduce((frequencies, item) => frequencies
-    .set(item, (map.get(item) / array.length)), new Map());
+  const map = itemCounts(items);
+  return items.reduce((frequencies, item) => frequencies
+    .set(item, (map.get(item) / items.length)), new Map());
 };
 
 const getHistogram = (frequencies, totalChartSize) => {
