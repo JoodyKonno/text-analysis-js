@@ -20,13 +20,11 @@ const sanitize = str => str
   .toLowerCase();
 
 const itemFrequency = (array) => {
-  if (typeof array !== 'object' && !array.isArray) {
-    return new Map();
-  }
+  const items = [].concat(array);
 
-  const map = itemCounts(array);
-  return array.reduce((frequencies, item) => frequencies
-    .set(item, (map.get(item) / array.length)), new Map());
+  const map = itemCounts(items);
+  return items.reduce((frequencies, item) => frequencies
+    .set(item, (map.get(item) / items.length)), new Map());
 };
 
 const getHistogram = (frequencies, totalChartSize) => {

@@ -89,7 +89,7 @@ describe('itemFrequency', () => {
 
   test('handles non-array inputs', () => {
     const input = 'hello';
-    const expectedOutput = new Map();
+    const expectedOutput = new Map([['hello', 1]]);
 
     expect(itemFrequency(input)).toEqual(expectedOutput);
   });
