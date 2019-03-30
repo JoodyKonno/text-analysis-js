@@ -18,7 +18,7 @@ const stringToLetterArray = (str) => {
 };
 
 const sanitize = (str) => {
-  if (typeof str === 'string') {
+  if (typeof str !== 'string') {
     return '';
   }
   return str
@@ -58,17 +58,16 @@ const main = () => {
   const args = process.argv.slice(2);
 
   args.forEach((arg) => {
-    fs.readFile(path.resolve(arg), (err, data) => {
+    fs.readFile(path.resolve(arg), 'utf8', (err, contents) => {
       if (err) {
         console.log('Error reading file: ');
         throw err;
       }
 
-      const contents = Buffer.from(data).toString();
-
       console.log(`File contents: ${contents.slice(0, 40)}...`);
 
       const itemFrequencies = itemFrequency(stringToLetterArray(sanitize(contents)));
+
       console.log(getHistogram(itemFrequencies, 200));
     });
   });
