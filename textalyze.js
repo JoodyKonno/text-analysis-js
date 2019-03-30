@@ -10,15 +10,31 @@ const itemCounts = array => array.reduce((counts, item) => (!counts.has(item)
   ? counts.set(item, 1)
   : counts.set(item, counts.get(item) + 1)), new Map());
 
+/**
+ * Given a string, returns an array of chears that composed the string
+ * @param {String} str - The string that will be converted
+ * @returns {Array} - An array of the chars that composed the string
+ */
 const stringToLetterArray = str => str
   .toString()
   .split('');
 
+/**
+ * Given a string, returns a lowercased string and without the non-aplphanumeric characters
+ * @param {String} str - The string that will be sanitized
+ * @returns {String} - The lowercased string without non-alphanumeric characters
+ */
 const sanitize = str => str
   .toString()
   .replace(/[^a-zA-Z]/g, '')
   .toLowerCase();
 
+/**
+ * Given an array, returns a Map of the itens contaning the frequency of
+ * the item inside the input array
+ * @param {Array} array - The array of itens with its frequencies
+ * @returns {Map} frequencies - A Map containing the frequencies of the items in the input array
+ */
 const itemFrequency = (array) => {
   const items = [].concat(array);
 
@@ -27,6 +43,13 @@ const itemFrequency = (array) => {
     .set(item, (map.get(item) / items.length)), new Map());
 };
 
+/**
+ * Given a map with frequencies and total chart bar size, returns
+ * the histogram
+ * @param {Map} frequencies - The map of frequencies
+ * @param {Number} totalChartSize - The total size of the chart bar on the console
+ * @returns {String} - A string containing the entire histogram
+ */
 const getHistogram = (frequencies, totalChartSize) => {
   const result = [];
 
