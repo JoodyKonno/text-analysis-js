@@ -57,21 +57,22 @@ function itemFrequency(array) {
  * @returns {String} - A string containing the entire histogram
  */
 function getHistogram(frequencies, totalChartSize) {
-  const result = [];
+  return Array
+    .from(frequencies)
+    .map((rawFrequency) => {
+      const bar = '=';
+      const letter = rawFrequency[0];
+      const frequency = rawFrequency[1];
 
-  frequencies.forEach((frequency, letter) => {
-    const bar = '=';
+      const itemBars = (frequency * 100) / (100 / totalChartSize);
+      const chartBar = Array(totalChartSize)
+        .fill(bar, 0, itemBars)
+        .join('');
+      const itemBarSpace = (frequency >= 0.1) ? '' : ' ';
 
-    const itemBars = (frequency * 100) / (100 / totalChartSize);
-    const chartBar = Array(totalChartSize)
-      .fill(bar, 0, itemBars)
-      .join('');
-    const itemBarSpace = (frequency >= 0.1) ? '' : ' ';
-
-    result.push(`${letter} [${itemBarSpace}${(frequency * 100).toFixed(2)}%] ${chartBar}>`);
-  });
-
-  return result.join('\n');
+      return `${letter} [${itemBarSpace}${(frequency * 100).toFixed(2)}%] ${chartBar}>`;
+    })
+    .join('\n');
 }
 
 function main() {
