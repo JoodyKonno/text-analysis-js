@@ -6,28 +6,34 @@ const path = require('path');
  * @param {Array} array - The array of items to count
  * @param {Map} counts - A Map containing the counts of the items in the input array
  */
-const itemCounts = array => array.reduce((counts, item) => (!counts.has(item)
-  ? counts.set(item, 1)
-  : counts.set(item, counts.get(item) + 1)), new Map());
+function itemCounts(array) {
+  return array.reduce((counts, item) => (!counts.has(item)
+    ? counts.set(item, 1)
+    : counts.set(item, counts.get(item) + 1)), new Map());
+}
 
 /**
  * Given a string, returns an array of chears that composed the string
  * @param {String} str - The string that will be converted
  * @returns {Array} - An array of the chars that composed the string
  */
-const stringToLetterArray = str => str
-  .toString()
-  .split('');
+function stringToLetterArray(str) {
+  return str
+    .toString()
+    .split('');
+}
 
 /**
  * Given a string, returns a lowercased string and without the non-aplphanumeric characters
  * @param {String} str - The string that will be sanitized
  * @returns {String} - The lowercased string without non-alphanumeric characters
  */
-const sanitize = str => str
-  .toString()
-  .replace(/[^a-zA-Z]/g, '')
-  .toLowerCase();
+function sanitize(str) {
+  return str
+    .toString()
+    .replace(/[^a-zA-Z]/g, '')
+    .toLowerCase();
+}
 
 /**
  * Given an array, returns a Map of the itens contaning the frequency of
@@ -35,13 +41,13 @@ const sanitize = str => str
  * @param {Array} array - The array of itens with its frequencies
  * @returns {Map} frequencies - A Map containing the frequencies of the items in the input array
  */
-const itemFrequency = (array) => {
+function itemFrequency(array) {
   const items = [].concat(array);
 
   const map = itemCounts(items);
   return items.reduce((frequencies, item) => frequencies
     .set(item, (map.get(item) / items.length)), new Map());
-};
+}
 
 /**
  * Given a map with frequencies and total chart bar size, returns
@@ -50,25 +56,26 @@ const itemFrequency = (array) => {
  * @param {Number} totalChartSize - The total size of the chart bar on the console
  * @returns {String} - A string containing the entire histogram
  */
-const getHistogram = (frequencies, totalChartSize) => {
-  const result = [];
+function getHistogram(frequencies, totalChartSize) {
+  return Array
+    .from(frequencies)
+    .map((rawFrequency) => {
+      const bar = '=';
+      const letter = rawFrequency[0];
+      const frequency = rawFrequency[1];
 
-  frequencies.forEach((frequency, letter) => {
-    const bar = '=';
+      const itemBars = (frequency * 100) / (100 / totalChartSize);
+      const chartBar = Array(totalChartSize)
+        .fill(bar, 0, itemBars)
+        .join('');
+      const itemBarSpace = (frequency >= 0.1) ? '' : ' ';
 
-    const itemBars = (frequency * 100) / (100 / totalChartSize);
-    const chartBar = Array(totalChartSize)
-      .fill(bar, 0, itemBars)
-      .join('');
-    const itemBarSpace = (frequency >= 0.1) ? '' : ' ';
+      return `${letter} [${itemBarSpace}${(frequency * 100).toFixed(2)}%] ${chartBar}>`;
+    })
+    .join('\n');
+}
 
-    result.push(`${letter} [${itemBarSpace}${(frequency * 100).toFixed(2)}%] ${chartBar}>`);
-  });
-
-  return result.join('\n');
-};
-
-const main = () => {
+function main() {
   const args = process.argv.slice(2);
 
   args.forEach((arg) => {
@@ -85,7 +92,7 @@ const main = () => {
       console.log(getHistogram(itemFrequencies, 200));
     });
   });
-};
+}
 
 if (require.main === module) {
   main();
